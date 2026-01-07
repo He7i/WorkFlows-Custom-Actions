@@ -85,4 +85,15 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Run custom action
+        id: deploy
         uses: ./.github/actions/deploy-s3-javascript
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          bucket: bucketybucket
+          dist-folder: ./dist
+          bucket-region: 'us-east-1'
+      - name: Output website URL
+        run: |
+           echo "Website URL: ${{ steps.deploy.outputs.website-url }}"
