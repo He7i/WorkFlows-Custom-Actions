@@ -1,0 +1,18 @@
+name: 'Deploy to AWS S3'
+description: 'Deploy a statc website via AWS s3'
+inputs:
+  bucket:
+   description: 'The s3 bucket name'
+   required: true
+  bucket-region:
+   description: 'The s3 bucket region'
+   required: true
+  dist-folder:
+   description: 'The folder to deploy'
+   required: true
+outputs:
+  website-url:
+   description: 'The website URL'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
